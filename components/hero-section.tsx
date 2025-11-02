@@ -58,7 +58,7 @@ export function HeroSection() {
 
           <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/business"
+              href="/contact"
               className="inline-block px-8 py-4 bg-[#A8E6CF] hover:bg-[#8FD9B6] text-slate-900 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
             >
               無料相談する

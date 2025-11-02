@@ -78,7 +78,7 @@ export default function ContactPage() {
     <main>
       <Header />
 
-      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-20">
+      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-24">
         <div className="absolute inset-0">
           <img src="/contact-hero-japanese.jpg" alt="Contact Us" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/50" />
@@ -179,11 +179,7 @@ export default function ContactPage() {
               </div>
 
               <div className="flex justify-center">
-                <div
-                  className="cf-turnstile"
-                  data-sitekey={process.env.NEXT_PUBLIC_CF_SITE_KEY}
-                  data-callback={(token: string) => setTurnstileToken(token)}
-                />
+                <div className="cf-turnstile mb-4" data-sitekey={process.env.NEXT_PUBLIC_CF_SITE_KEY} />
               </div>
 
               {status === "loading" && <div className="text-center text-muted-foreground">送信中…</div>}
@@ -201,7 +197,7 @@ export default function ContactPage() {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full text-lg py-6 bg-secondary hover:bg-primary hover:text-secondary transition-colors"
+                className="relative z-10 w-full text-lg py-6 bg-secondary hover:bg-primary hover:text-secondary transition-colors"
                 disabled={status === "loading" || !turnstileToken}
               >
                 <Send className="mr-2 w-5 h-5" />

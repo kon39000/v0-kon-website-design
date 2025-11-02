@@ -11,7 +11,7 @@ export default function BusinessPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20">
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-24">
         <div className="absolute inset-0">
           <img src="/business-hero-japanese.jpg" alt="Business AI Solutions" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/40" />

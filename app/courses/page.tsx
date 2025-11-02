@@ -149,7 +149,7 @@ export default function CoursesPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-6 lg:px-12">
+      <section className="pt-24 pb-16 px-6 lg:px-12">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16 animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-serif font-medium text-foreground mb-6">Udemy講座一覧</h1>

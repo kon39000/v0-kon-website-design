@@ -10,7 +10,7 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20">
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-24">
         <div className="absolute inset-0">
           <img src="/about-hero-japanese.jpg" alt="About KONTOMO" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/40" />
