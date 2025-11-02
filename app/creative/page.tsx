@@ -37,7 +37,7 @@ export default function CreativePage() {
             <Card className="p-8 hover:shadow-lg transition-shadow overflow-hidden">
               <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-6">
                 <Image
-                  src="/ai-contents-labo-team.jpg"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-RwZS3hEqSsezFHWEv6B51j8aPbo1ul.png"
                   alt="AIコンテンツラボのチームメンバー"
                   fill
                   className="object-cover"
