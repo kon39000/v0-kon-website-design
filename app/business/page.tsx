@@ -65,7 +65,7 @@ export default function BusinessPage() {
                 いつでもどこでも学べる、実践的なAI活用講座をUdemyで提供しています。
               </p>
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <a href="https://www.udemy.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.udemy.com/user/kon-101/" target="_blank" rel="noopener noreferrer">
                   Udemyで見る
                 </a>
               </Button>
@@ -79,7 +79,7 @@ export default function BusinessPage() {
                 無料で学べるAI活用のヒントやチュートリアルをYouTubeで公開しています。
               </p>
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.youtube.com/@nsc-nmo" target="_blank" rel="noopener noreferrer">
                   YouTubeで見る
                 </a>
               </Button>
@@ -99,22 +99,105 @@ export default function BusinessPage() {
           </div>
 
           <div className="max-w-5xl mx-auto">
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-              {[
-                { number: "100+", label: "セミナー開催数" },
-                { number: "3,000+", label: "受講者数" },
-                { number: "50+", label: "企業・自治体" },
-                { number: "4.8/5.0", label: "満足度" },
-              ].map((stat, index) => (
-                <div key={index} className="text-center p-6 bg-white rounded-lg shadow-sm">
-                  <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">{stat.number}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+            <div className="mb-12 bg-white rounded-lg p-8 shadow-sm">
+              <h3 className="text-2xl font-bold mb-6">企業研修・セミナー実績</h3>
+              <div className="space-y-3 text-muted-foreground">
+                <div className="flex justify-between items-center border-b pb-2">
+                  <span>企業研修（ChatGPTメイン／初心者向け）</span>
+                  <span className="font-semibold text-foreground">約40名</span>
                 </div>
-              ))}
+                <div className="flex justify-between items-center border-b pb-2">
+                  <span>企業研修（バイブコーディング中心／初心者向け）</span>
+                  <span className="font-semibold text-foreground">約40名</span>
+                </div>
+                <div className="flex justify-between items-center border-b pb-2">
+                  <span>自治体主催スキルアップ講座（ChatGPT初心者向け）</span>
+                  <span className="font-semibold text-foreground">約30名</span>
+                </div>
+                <div className="flex justify-between items-center border-b pb-2">
+                  <span>自治体主催スキルアップ講座（AIセキュリティ・リサーチ活用）</span>
+                  <span className="font-semibold text-foreground">約30名</span>
+                </div>
+                <div className="flex justify-between items-center border-b pb-2">
+                  <span>自治体主催個人事業者向けセミナー（ChatGPT初心者向け）</span>
+                  <span className="font-semibold text-foreground">約5名</span>
+                </div>
+                <div className="flex justify-between items-center border-b pb-2">
+                  <span>親子AIワークショップ主催（ChatGPTでぬりえを作ろう）</span>
+                  <span className="font-semibold text-foreground">約5組</span>
+                </div>
+              </div>
             </div>
 
-            {/* Achievement Cards */}
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              {/* Udemy Stats */}
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <div className="flex items-center gap-2 mb-4">
+                  <Video className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-bold">Udemy講座</h3>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">講座数</span>
+                    <span className="font-semibold">15講座</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">受講生数</span>
+                    <span className="font-semibold">1,650人</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">評価</span>
+                    <span className="font-semibold text-primary">4.3/5.0</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Peatix Stats */}
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <div className="flex items-center gap-2 mb-4">
+                  <Users className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-bold">Peatix</h3>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">イベント数</span>
+                    <span className="font-semibold">133件</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">フォロワー数</span>
+                    <span className="font-semibold">5,245名</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">申込者総数</span>
+                    <span className="font-semibold">23,503件</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Overall Impact */}
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <div className="flex items-center gap-2 mb-4">
+                  <Award className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-bold">総合実績</h3>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">延べ参加者</span>
+                    <span className="font-semibold">25,000+</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">企業・自治体</span>
+                    <span className="font-semibold">50+</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">満足度</span>
+                    <span className="font-semibold text-primary">4.5/5.0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Achievement Cards - kept for visual variety */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <Card className="p-6 hover:shadow-lg transition-shadow">
                 <Award className="w-10 h-10 text-primary mb-4" />
@@ -155,19 +238,39 @@ export default function BusinessPage() {
 
             {/* Client Testimonials */}
             <div className="mt-12 bg-white rounded-lg p-8 shadow-sm">
-              <h3 className="text-2xl font-bold mb-6 text-center">お客様の声</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="border-l-4 border-primary pl-4">
-                  <p className="text-muted-foreground mb-3 leading-relaxed">
-                    「実践的な内容で、すぐに業務に活かせる知識が得られました。社員のAIリテラシーが大幅に向上しました。」
-                  </p>
-                  <p className="text-sm font-semibold">— 製造業A社 人事部長</p>
+              <h3 className="text-2xl font-bold mb-8 text-center">お客様の声</h3>
+              <p className="text-center text-muted-foreground mb-8">企業研修参加者からのコメント</p>
+              <div className="space-y-8">
+                {/* Testimonial 1 */}
+                <div className="border-l-4 border-primary pl-6 py-4">
+                  <div className="space-y-4 text-muted-foreground leading-relaxed">
+                    <p>
+                      今回の研修では、AIの利便性と留意点を学ぶことができ、正しく恐れながら使うことで、業務効率化を進めることができそうだと感じました。ChatGPTに「情報源を示して」と付け加えるだけでリンクを示してくれることを知り、今後活用していきたいと思いました。
+                    </p>
+                    <p>
+                      バイブコーディングを初めて体験し、複雑なプログラミングが必要だと思っていたサイトやアプリ作成が、明確に伝えるだけで実現できることに驚きました。一見難しい指示でも、プロンプトを工夫すれば一発で出力できることを実感しました。
+                    </p>
+                    <p>
+                      AIにもできる作業が増える中、「この会社だから、この人だから依頼したい」と思ってもらえるような個性を見出すことが大切だと学びました。今回の研修で学んだ技術を活かし、部署全体でAI活用の方法を共有し、できるところから効率化を進めていきたいです。
+                    </p>
+                  </div>
+                  <p className="text-sm font-semibold mt-4 text-foreground">— 企業研修参加者A様</p>
                 </div>
-                <div className="border-l-4 border-primary pl-4">
-                  <p className="text-muted-foreground mb-3 leading-relaxed">
-                    「親子ワークショップは大好評でした。子どもたちが楽しみながらAIを学べる素晴らしい機会になりました。」
-                  </p>
-                  <p className="text-sm font-semibold">— B市 教育委員会</p>
+
+                {/* Testimonial 2 */}
+                <div className="border-l-4 border-primary pl-6 py-4">
+                  <div className="space-y-4 text-muted-foreground leading-relaxed">
+                    <p>
+                      今回のAI研修を通じて、最新の技術動向から具体的なツールの活用方法、そして安全に使うための考え方まで、幅広く学ぶことができました。ChatGPTだけでなく、ClaudeやGeminiなど数多くのツールがあり、場面ごとに使い分けられていることを知り、視野が大きく広がりました。
+                    </p>
+                    <p>
+                      AI活用におけるセキュリティや倫理についても学び直す機会となりました。便利さに頼るあまり、安易に情報を入力してしまう危うさや、著作権・プライバシーへの配慮の必要性は、日々の業務で常に意識しておくべきだと感じています。
+                    </p>
+                    <p>
+                      実践演習ではCanvaを使ったデザイン作成がとても印象的でした。専門的な知識がなくても実用的なものを形にできるのは、新しい発想を素早く試す上で非常に大きな強みになると感じました。今後は、AIを単なる効率化の道具としてだけでなく、企画やアイデアを形にする際の"発想のパートナー"としても取り入れ、学んだことを周囲とも共有していきたいと思います。
+                    </p>
+                  </div>
+                  <p className="text-sm font-semibold mt-4 text-foreground">— 企業研修参加者B様</p>
                 </div>
               </div>
             </div>

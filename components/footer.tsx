@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Twitter, Youtube, FileText, Mic, BookOpen, Calendar } from "lucide-react"
+import { Twitter, Youtube, FileText, Mic, BookOpen, Radio } from "lucide-react"
 
 export function Footer() {
   const navLinks = [
@@ -7,16 +7,17 @@ export function Footer() {
     { href: "/about", label: "About" },
     { href: "/business", label: "Business" },
     { href: "/creative", label: "Creative" },
+    { href: "/courses", label: "Courses" }, // Added Courses link
     { href: "/contact", label: "Contact" },
   ]
 
   const socialLinks = [
-    { href: "https://twitter.com", icon: Twitter, label: "X (Twitter)" },
-    { href: "https://note.com", icon: FileText, label: "note" },
-    { href: "https://voicy.jp", icon: Mic, label: "Voicy" },
-    { href: "https://youtube.com", icon: Youtube, label: "YouTube" },
-    { href: "https://udemy.com", icon: BookOpen, label: "Udemy" },
-    { href: "https://peatix.com", icon: Calendar, label: "Peatix" },
+    { href: "https://twitter.com/kon39000", icon: Twitter, label: "X (Twitter)" },
+    { href: "https://note.com/kon39000", icon: FileText, label: "note" },
+    { href: "https://voicy.jp/channel/821951", icon: Mic, label: "Voicy" },
+    { href: "https://www.youtube.com/@nsc-nmo", icon: Youtube, label: "YouTube" },
+    { href: "https://www.udemy.com/user/kon-101/", icon: BookOpen, label: "Udemy" },
+    { href: "https://stand.fm/channels/5fd9a8143147b7f1382167e2", icon: Radio, label: "stand.fm" },
   ]
 
   return (

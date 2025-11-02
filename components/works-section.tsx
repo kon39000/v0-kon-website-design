@@ -29,7 +29,8 @@ const works = [
   {
     title: "AIアートコンテスト開催",
     description: "AI生成アートのコンテストを企画・運営。クリエイターの創造性を引き出す場を提供。",
-    image: "/work-art-contest-jp.jpg",
+    image:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%E7%AC%AC2%E5%9B%9EAI%E3%82%A2%E3%83%BC%E3%83%88%E3%82%B3%E3%83%B3%E3%83%86%E3%82%B9%E3%83%88-rGOXoOCJBUolSUpAQxhixvWlzbc0ys.png",
   },
 ]
 

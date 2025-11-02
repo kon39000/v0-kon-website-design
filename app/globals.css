@@ -171,6 +171,11 @@
   animation: fadeIn 1s ease-out forwards;
 }
 
+/* Added animation delay utility class */
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
