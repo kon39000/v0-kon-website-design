@@ -5,7 +5,6 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
@@ -78,7 +77,7 @@ export default function ContactPage() {
     <main>
       <Header />
 
-      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-24">
+      <section className="relative min-h-[50vh] flex items-center justify-center pt-24">
         <div className="absolute inset-0">
           <img src="/contact-hero-japanese.jpg" alt="Contact Us" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/50" />
@@ -97,9 +96,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24">
+      <section className="py-16 sm:py-24 pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="max-w-2xl mx-auto p-8 sm:p-12">
+          <Card className="max-w-2xl mx-auto p-8 sm:p-12 pb-12">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium">
@@ -179,7 +178,7 @@ export default function ContactPage() {
               </div>
 
               <div className="flex justify-center">
-                <div className="cf-turnstile mb-4" data-sitekey={process.env.NEXT_PUBLIC_CF_SITE_KEY} />
+                <div className="cf-turnstile mb-6" data-sitekey={process.env.NEXT_PUBLIC_CF_SITE_KEY} />
               </div>
 
               {status === "loading" && <div className="text-center text-muted-foreground">送信中…</div>}
@@ -194,15 +193,14 @@ export default function ContactPage() {
                 </div>
               )}
 
-              <Button
+              <button
                 type="submit"
-                size="lg"
-                className="relative z-10 w-full text-lg py-6 bg-secondary hover:bg-primary hover:text-secondary transition-colors"
+                className="relative z-10 w-full bg-[#A8E6CF] text-gray-800 py-3 rounded hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg font-medium"
                 disabled={status === "loading" || !turnstileToken}
               >
-                <Send className="mr-2 w-5 h-5" />
+                <Send className="w-5 h-5" />
                 送信する
-              </Button>
+              </button>
             </form>
           </Card>
         </div>
