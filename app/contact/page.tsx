@@ -178,7 +178,10 @@ export default function ContactPage() {
               </div>
 
               <div className="flex justify-center">
-                <div className="cf-turnstile mb-6" data-sitekey={process.env.NEXT_PUBLIC_CF_SITE_KEY} />
+                <div
+                  className="cf-turnstile relative z-0 h-[70px] mb-6"
+                  data-sitekey={process.env.NEXT_PUBLIC_CF_SITE_KEY}
+                />
               </div>
 
               {status === "loading" && <div className="text-center text-muted-foreground">送信中…</div>}
