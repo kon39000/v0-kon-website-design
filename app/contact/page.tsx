@@ -31,8 +31,24 @@ export default function ContactPage() {
     script.onload = () => setTurnstileLoaded(true)
     document.body.appendChild(script)
 
+    // Expose Turnstile callbacks to capture/clear token
+    ;(window as any).onTurnstileSuccess = (token: string) => {
+      setTurnstileToken(token)
+      setStatus("idle")
+    }
+    ;(window as any).onTurnstileExpired = () => {
+      setTurnstileToken("")
+    }
+    ;(window as any).onTurnstileError = () => {
+      setTurnstileToken("")
+      setStatus("error")
+    }
+
     return () => {
       document.body.removeChild(script)
+      delete (window as any).onTurnstileSuccess
+      delete (window as any).onTurnstileExpired
+      delete (window as any).onTurnstileError
     }
   }, [])
 
@@ -65,6 +81,7 @@ export default function ContactPage() {
         if (window.turnstile) {
           window.turnstile.reset()
         }
+        setTurnstileToken("")
       } else {
         setStatus("error")
       }
@@ -181,6 +198,9 @@ export default function ContactPage() {
                 <div
                   className="cf-turnstile relative z-0 h-[70px] mb-6"
                   data-sitekey={process.env.NEXT_PUBLIC_CF_SITE_KEY}
+                  data-callback="onTurnstileSuccess"
+                  data-expired-callback="onTurnstileExpired"
+                  data-error-callback="onTurnstileError"
                 />
               </div>
 
@@ -219,5 +239,8 @@ declare global {
     turnstile: {
       reset: () => void
     }
+    onTurnstileSuccess: (token: string) => void
+    onTurnstileExpired: () => void
+    onTurnstileError: () => void
   }
 }

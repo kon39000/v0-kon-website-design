@@ -5,16 +5,14 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { name, company, email, category, message, "cf-turnstile-response": turnstileToken } = body
 
-    // Verify Turnstile token
+    // Verify Turnstile token (must be x-www-form-urlencoded)
+    const params = new URLSearchParams()
+    params.append("secret", process.env.CF_SECRET_KEY || "")
+    params.append("response", turnstileToken || "")
+
     const verifyResponse = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        secret: process.env.CF_SECRET_KEY,
-        response: turnstileToken,
-      }),
+      body: params,
     })
 
     const verifyData = await verifyResponse.json()
