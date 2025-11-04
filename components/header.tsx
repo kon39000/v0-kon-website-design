@@ -8,16 +8,55 @@ import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/s
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [overHero, setOverHero] = useState(false)
+  const [hasSentinel, setHasSentinel] = useState(false)
   const pathname = usePathname()
+  // モバイルは常時ソリッドにして視認性を確保
+  const [isMobile, setIsMobile] = useState<boolean>(false)
 
   useEffect(() => {
+    // モバイル判定（md未満）。初回とリサイズで更新。
+    const checkMobile = () => {
+      if (typeof window !== "undefined") {
+        setIsMobile(window.innerWidth < 768)
+      }
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+
     const handleScroll = () => {
-      // Avoid showing header background while still over the hero
       setIsScrolled(window.scrollY > 80)
     }
     handleScroll()
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+
+    // Observe hero sentinel for contextual header styling
+    const sentinel = document.querySelector('[data-header-sentinel]') as HTMLElement | null
+    if (sentinel) {
+      setHasSentinel(true)
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0]
+          setOverHero(entry.isIntersecting)
+        },
+        {
+          // Start switching just before the header overlaps the hero top
+          rootMargin: "-80px 0px 0px 0px",
+          threshold: 0,
+        }
+      )
+      observer.observe(sentinel)
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll)
+        observer.disconnect()
+      }
+    }
+
+    return () => {
+      window.removeEventListener("resize", checkMobile)
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   const navLinks = [
@@ -29,12 +68,26 @@ export function Header() {
     { href: "/contact", label: "Contact" },
   ]
 
+  // A案: 非トップページは常時ソリッド背景。トップのみスクロール/ヒーロー交差で切替。
+  const isHome = pathname === "/"
+  const solid = "bg-background/95 backdrop-blur-sm border-b border-border"
+  const semi = "bg-background/80 backdrop-blur-sm border-b border-border/60"
+  const transparent = "bg-transparent"
+
+  const headerStyle = isMobile
+    ? solid
+    : isHome
+      ? hasSentinel
+        ? overHero
+          ? semi
+          : solid
+        : isScrolled
+          ? solid
+          : transparent
+      : solid
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-sm border-b border-border" : "bg-transparent"
-      }`}
-    >
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerStyle}`}>
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="text-xl font-serif font-medium text-foreground">
@@ -67,12 +120,12 @@ export function Header() {
               <SheetTrigger asChild>
                 <button
                   aria-label="Open menu"
-                  className="inline-flex items-center justify-center rounded-md p-2 text-foreground/80 hover:text-foreground hover:bg-foreground/10 focus:outline-hidden focus:ring-2 focus:ring-ring"
+                  className="inline-flex items-center justify-center rounded-md p-2 text-foreground hover:text-foreground hover:bg-foreground/10 focus:outline-hidden focus:ring-2 focus:ring-ring"
                 >
                   <Menu className="h-6 w-6" />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="p-0">
+              <SheetContent side="right" className="p-0 w-[85%] sm:w-80">
                 <div className="p-6">
                   <div className="text-lg font-serif mb-4">KONTOMO</div>
                   <nav className="flex flex-col gap-3">

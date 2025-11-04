@@ -24,6 +24,12 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-cyan-50">
+      {/* Header behavior sentinel (observed by Header) */}
+      <div
+        data-header-sentinel
+        aria-hidden
+        className="pointer-events-none absolute top-0 inset-x-0 h-20"
+      />
       <div className="absolute inset-0">
         <div className="absolute inset-0 opacity-25">
           {heroImages.map((image, index) => (

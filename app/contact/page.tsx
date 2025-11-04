@@ -95,6 +95,8 @@ export default function ContactPage() {
       <Header />
 
       <section className="relative min-h-[50vh] flex items-center justify-center pt-24">
+        {/* Header behavior sentinel for this page's hero */}
+        <div data-header-sentinel aria-hidden className="pointer-events-none absolute top-0 inset-x-0 h-20" />
         <div className="absolute inset-0">
           <img src="/contact-hero-japanese.jpg" alt="Contact Us" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/50" />
