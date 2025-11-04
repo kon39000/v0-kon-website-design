@@ -5,20 +5,45 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { name, company, email, category, message, "cf-turnstile-response": turnstileToken } = body
 
-    // Verify Turnstile token (must be x-www-form-urlencoded)
-    const params = new URLSearchParams()
-    params.append("secret", process.env.CF_SECRET_KEY || "")
-    params.append("response", turnstileToken || "")
+    // Basic guards for required env vars and token
+    const secret = process.env.CF_SECRET_KEY
+    const webhookUrl = process.env.WEBHOOK_URL
+    if (!secret) {
+      console.error("Contact API misconfiguration: CF_SECRET_KEY is missing")
+      return NextResponse.json({ error: "Server misconfiguration" }, { status: 500 })
+    }
+    if (!webhookUrl) {
+      console.error("Contact API misconfiguration: WEBHOOK_URL is missing")
+      return NextResponse.json({ error: "Server misconfiguration" }, { status: 500 })
+    }
+    if (!turnstileToken) {
+      return NextResponse.json({ error: "Missing Turnstile token" }, { status: 400 })
+    }
+
+    // Verify Turnstile token (application/x-www-form-urlencoded)
+    const bodyEncoded = new URLSearchParams()
+    bodyEncoded.set("secret", secret)
+    bodyEncoded.set("response", turnstileToken)
 
     const verifyResponse = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
       method: "POST",
-      body: params,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: bodyEncoded,
     })
 
-    const verifyData = await verifyResponse.json()
-
-    if (!verifyData.success) {
+    if (!verifyResponse.ok) {
+      const text = await verifyResponse.text().catch(() => "")
+      console.error("Turnstile verify HTTP error", verifyResponse.status, text)
       return NextResponse.json({ error: "Verification failed" }, { status: 400 })
+    }
+
+    const verifyData = await verifyResponse.json()
+    if (!verifyData.success) {
+      console.warn("Turnstile verification error-codes:", verifyData["error-codes"]) // no secrets
+      return NextResponse.json(
+        { error: "Verification failed", codes: verifyData["error-codes"] },
+        { status: 400 }
+      )
     }
 
     // Send to Discord webhook
@@ -59,7 +84,7 @@ export async function POST(request: NextRequest) {
       ],
     }
 
-    const webhookResponse = await fetch(process.env.WEBHOOK_URL!, {
+    const webhookResponse = await fetch(webhookUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +93,9 @@ export async function POST(request: NextRequest) {
     })
 
     if (!webhookResponse.ok) {
-      throw new Error("Failed to send to Discord")
+      const text = await webhookResponse.text().catch(() => "")
+      console.error("Failed to send to Discord", webhookResponse.status, text)
+      return NextResponse.json({ error: "Webhook failed" }, { status: 502 })
     }
 
     return NextResponse.json({ ok: true })
