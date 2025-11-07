@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
+import nodemailer from "nodemailer"
 
 export async function POST(request: NextRequest) {
   try {
@@ -7,7 +8,7 @@ export async function POST(request: NextRequest) {
 
     // Basic guards for required env vars and token
     const secret = process.env.CF_SECRET_KEY
-    const webhookUrl = process.env.WEBHOOK_URL
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL || process.env.WEBHOOK_URL
     if (!secret) {
       console.error("Contact API misconfiguration: CF_SECRET_KEY is missing")
       return NextResponse.json({ error: "Server misconfiguration" }, { status: 500 })
@@ -96,6 +97,62 @@ export async function POST(request: NextRequest) {
       const text = await webhookResponse.text().catch(() => "")
       console.error("Failed to send to Discord", webhookResponse.status, text)
       return NextResponse.json({ error: "Webhook failed" }, { status: 502 })
+    }
+
+    // Send auto-reply email to the sender via Nodemailer
+    const smtpHost = process.env.SMTP_HOST
+    const smtpPort = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : undefined
+    const smtpUser = process.env.SMTP_USER
+    const smtpPass = process.env.SMTP_PASS
+    const fromEmail = process.env.FROM_EMAIL
+
+    if (!smtpHost || !smtpPort || !smtpUser || !smtpPass || !fromEmail) {
+      console.error("Contact API misconfiguration: SMTP_* or FROM_EMAIL env is missing")
+      return NextResponse.json({ error: "Server misconfiguration" }, { status: 500 })
+    }
+
+    const transporter = nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpPort === 465,
+      auth: { user: smtpUser, pass: smtpPass },
+    })
+
+    const subject = "【KONTOMO】お問い合わせありがとうございます"
+    const text = `${name} 様
+
+このたびはお問い合わせありがとうございます。
+以下の内容で受け付けいたしました。
+
+───────────────
+【お名前】${name}
+【会社名】${company || "未記入"}
+【メールアドレス】${email}
+【お問い合わせ種別】${category}
+【お問い合わせ内容】
+${message}
+───────────────
+
+内容を確認のうえ、担当者より折り返しご連絡いたします。
+今後とも KONTOMO をよろしくお願いいたします。
+
+---
+
+KONTOMO AI サポートチーム
+https://www.kontomo-ai.com/
+----------------------------------------------------------
+`
+
+    try {
+      await transporter.sendMail({
+        from: fromEmail,
+        to: email,
+        subject,
+        text,
+      })
+    } catch (mailErr) {
+      console.error("Failed to send auto-reply mail:", mailErr)
+      return NextResponse.json({ error: "Mail send failed" }, { status: 500 })
     }
 
     return NextResponse.json({ ok: true })
