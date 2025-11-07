@@ -119,67 +119,71 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Card className="max-w-2xl mx-auto p-8 sm:p-12 pb-12">
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium">
-                  お名前 <span className="text-destructive">*</span>
-                </label>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="山田 太郎"
-                  required
-                  className="w-full"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                />
+              {/* Row 1: name / email */}
+              <div className="flex flex-col md:flex-row md:gap-6">
+                <div className="flex-1 space-y-2">
+                  <label htmlFor="name" className="text-sm font-medium">
+                    お名前 <span className="text-destructive">*</span>
+                  </label>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="山田 太郎"
+                    required
+                    className="w-full"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                </div>
+                <div className="flex-1 space-y-2 mt-6 md:mt-0">
+                  <label htmlFor="email" className="text-sm font-medium">
+                    メールアドレス <span className="text-destructive">*</span>
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="example@email.com"
+                    required
+                    className="w-full"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="company" className="text-sm font-medium">
-                  会社名・組織名
-                </label>
-                <Input
-                  id="company"
-                  type="text"
-                  placeholder="株式会社〇〇"
-                  className="w-full"
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium">
-                  メールアドレス <span className="text-destructive">*</span>
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="example@email.com"
-                  required
-                  className="w-full"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="category" className="text-sm font-medium">
-                  お問い合わせ種別 <span className="text-destructive">*</span>
-                </label>
-                <select
-                  id="category"
-                  required
-                  className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                >
-                  <option value="">選択してください</option>
-                  <option value="法人・自治体案件について">法人・自治体案件について</option>
-                  <option value="講座・登壇依頼について">講座・登壇依頼について</option>
-                  <option value="取材・メディア掲載について">取材・メディア掲載について</option>
-                  <option value="その他">その他</option>
-                </select>
+              {/* Row 2: company / category */}
+              <div className="flex flex-col md:flex-row md:gap-6">
+                <div className="flex-1 space-y-2">
+                  <label htmlFor="company" className="text-sm font-medium">
+                    会社名・組織名
+                  </label>
+                  <Input
+                    id="company"
+                    type="text"
+                    placeholder="株式会社〇〇"
+                    className="w-full"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  />
+                </div>
+                <div className="flex-1 space-y-2 mt-6 md:mt-0">
+                  <label htmlFor="category" className="text-sm font-medium">
+                    お問い合わせ種別 <span className="text-destructive">*</span>
+                  </label>
+                  <select
+                    id="category"
+                    required
+                    className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  >
+                    <option value="">選択してください</option>
+                    <option value="法人・自治体案件について">法人・自治体案件について</option>
+                    <option value="講座・登壇依頼について">講座・登壇依頼について</option>
+                    <option value="取材・メディア掲載について">取材・メディア掲載について</option>
+                    <option value="その他">その他</option>
+                  </select>
+                </div>
               </div>
 
               <div className="space-y-2">
