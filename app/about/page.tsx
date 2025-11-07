@@ -48,6 +48,27 @@ export default function AboutPage() {
                 AIの力で「できること」を広げ、一人ひとりの可能性を解き放つ未来を創ります。
               </p>
             </div>
+            <div className="space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-bold text-secondary">Value</h2>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <h3 className="text-lg font-bold mb-2">実践主義</h3>
+                  <p className="text-muted-foreground">まずやってみる。小さな一歩を積み重ね、価値へとつなげる。</p>
+                </div>
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <h3 className="text-lg font-bold mb-2">オープン</h3>
+                  <p className="text-muted-foreground">誰でも学べる・試せる環境づくり。情報は分かりやすく、シェアフレンドリーに。</p>
+                </div>
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <h3 className="text-lg font-bold mb-2">伴走</h3>
+                  <p className="text-muted-foreground">学び合い・育て合うコミュニティで、一人では届かない成果へ。</p>
+                </div>
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <h3 className="text-lg font-bold mb-2">創造</h3>
+                  <p className="text-muted-foreground">AIと人の共創で、新しい表現と仕事のかたちを切り開く。</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -140,10 +161,6 @@ export default function AboutPage() {
               <div className="grid grid-cols-3 gap-4 border-b pb-4">
                 <div className="font-bold">代表</div>
                 <div className="col-span-2">こんとも（勝沼　知世）</div>
-              </div>
-              <div className="grid grid-cols-3 gap-4 border-b pb-4">
-                <div className="font-bold">所在地</div>
-                <div className="col-span-2">東京都</div>
               </div>
               <div className="grid grid-cols-3 gap-4 border-b pb-4">
                 <div className="font-bold">設立</div>

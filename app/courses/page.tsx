@@ -158,66 +158,72 @@ export default function CoursesPage() {
             </p>
           </div>
 
-          {/* Courses Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {courses.map((course, index) => (
-              <div
-                key={course.id}
-                className="bg-white border border-border rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {course.thumbnail && (
-                  <div className="relative w-full h-48 bg-gray-100">
-                    <Image
-                      src={course.thumbnail || "/placeholder.svg"}
-                      alt={course.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  </div>
-                )}
-
-                <div className="p-6">
-                  {/* Rating */}
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-4 h-4 ${
-                            i < Math.floor(course.rating) ? "fill-accent text-accent" : "text-border"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-sm font-medium text-foreground">{course.rating}</span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-lg font-sans font-bold text-foreground mb-3 leading-snug">{course.title}</h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-foreground/60 mb-4 leading-relaxed">{course.description}</p>
-
-                  {/* Price */}
-                  <div className="mb-4">
-                    <span className="text-2xl font-bold text-foreground">¥{course.price.toLocaleString()}</span>
-                  </div>
-
-                  {/* Link Button */}
-                  <a
-                    href={course.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors group"
-                  >
-                    <span>→ Udemyで見る</span>
-                    <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                  </a>
-                </div>
-              </div>
-            ))}
+          {/* Courses Table (aligned columns) */}
+          <div className="overflow-x-auto">
+            <table className="min-w-full border border-border bg-white rounded-lg overflow-hidden">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground w-[160px]">サムネイル</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground">評価</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground">タイトル</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground">おすすめの人</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground">金額</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground">リンク</th>
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((course) => (
+                  <tr key={course.id} className="border-t border-border">
+                    <td className="px-4 py-3 align-top">
+                      {course.thumbnail && (
+                        <div className="relative w-[140px] h-[80px] bg-gray-100 rounded">
+                          <Image
+                            src={course.thumbnail || "/placeholder.svg"}
+                            alt={course.title}
+                            fill
+                            className="object-cover rounded"
+                            sizes="140px"
+                          />
+                        </div>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 align-top">
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`w-4 h-4 ${i < Math.floor(course.rating) ? "fill-accent text-accent" : "text-border"}`}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-sm font-medium text-foreground">{course.rating}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 align-top">
+                      <div className="text-sm font-bold text-foreground">{course.title}</div>
+                    </td>
+                    <td className="px-4 py-3 align-top">
+                      <div className="text-sm text-foreground/70">{course.description}</div>
+                    </td>
+                    <td className="px-4 py-3 align-top whitespace-nowrap">
+                      <span className="text-lg font-bold text-foreground">¥{course.price.toLocaleString()}</span>
+                    </td>
+                    <td className="px-4 py-3 align-top">
+                      <a
+                        href={course.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors group"
+                      >
+                        <span>→ Udemyで見る</span>
+                        <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
           {/* Bottom Note */}

@@ -17,7 +17,7 @@ const works = [
     image: "/work-online-course-jp.jpg",
   },
   {
-    title: "AIコンテンツラボ（オンラインコミュニティ）運営",
+    title: "オンラインコミュニティ運営",
     description: "クリエイター向けオンラインコミュニティを運営。メンバー同士の学び合いと創作活動を支援。",
     image: "/work-content-lab-jp.jpg",
   },

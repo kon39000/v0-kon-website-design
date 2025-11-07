@@ -20,6 +20,29 @@ export const metadata: Metadata = {
   title: 'KONTOMO | AIで"人の力"を支える',
   description: "静かな熱量で、AIと人の共創を支援します。",
   generator: "v0.app",
+  openGraph: {
+    title: 'KONTOMO | AIで"人の力"を支える',
+    description: "静かな熱量で、AIと人の共創を支援します。",
+    type: "website",
+    siteName: "KONTOMO",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "KONTOMO | AIで\"人の力\"を支える",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: 'KONTOMO | AIで"人の力"を支える',
+    description: "静かな熱量で、AIと人の共創を支援します。",
+    images: ["/opengraph-image"],
+  },
+  icons: {
+    icon: [{ url: "/icon", type: "image/png", sizes: "32x32" }],
+  },
 }
 
 export default function RootLayout({
