@@ -1,9 +1,25 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { ExternalLink, Star } from "lucide-react"
+import { Star, Check } from "lucide-react"
 import Image from "next/image"
 
-const courses = [
+type Course = {
+  id: number
+  title: string
+  rating: number
+  price: number
+  description: string
+  link: string
+  thumbnail: string
+  originalPrice?: number
+  ratingCount?: number
+  badge?: string
+  hours?: string
+  lectures?: string
+  level?: string
+}
+
+const courses: Course[] = [
   {
     id: 1,
     title: "もう悩まない！ChatGPTでSNS＆ブログのアイデア出しから記事作成までを時短で実現",
@@ -12,6 +28,10 @@ const courses = [
     description: "SNSやブログ運営を効率化したい人／ネタ切れを防ぎたい発信者／ChatGPTでマーケティングを学びたい初心者",
     link: "https://www.udemy.com/user/kon-101/",
     thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Udemy1-1YMA37lI3wn2EYjNHT4nhrsvySg71L.png",
+    ratingCount: 14,
+    hours: "3時間",
+    lectures: "40本",
+    level: "初級",
   },
   {
     id: 2,
@@ -21,6 +41,11 @@ const courses = [
     description: "電子書籍出版に挑戦したい人／ChatGPTで文章構成を学びたい人／在宅で収益化を目指す副業初心者",
     link: "https://www.udemy.com/user/kon-101/",
     thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Udemy2-R9ebZtOzKGvk6UEyqoNQ9WE8J1TSSG.png",
+    ratingCount: 334,
+    badge: "ベストセラー",
+    hours: "2時間",
+    lectures: "26本",
+    level: "中級",
   },
   {
     id: 3,
@@ -30,6 +55,10 @@ const courses = [
     description: "noteで発信力を高めたい人／SEOを学びたいライター・ブロガー／ChatGPTで記事構成を最適化したい人",
     link: "https://www.udemy.com/user/kon-101/",
     thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Udemy3-sTb3CaC5g0ZHt6zXwUJ12dB6pmUg0U.png",
+    ratingCount: 44,
+    hours: "6時間",
+    lectures: "66本",
+    level: "初級",
   },
   {
     id: 4,
@@ -145,97 +174,128 @@ const courses = [
 
 export default function CoursesPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 px-6 lg:px-12">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-4xl md:text-5xl font-serif font-medium text-foreground mb-6">Udemy講座一覧</h1>
-            <p className="text-lg text-foreground/70 font-sans max-w-3xl mx-auto">
-              AIを活用して、学び・発信・仕事を変える15の実践講座
-            </p>
+      <section className="pt-24 pb-12 px-6 lg:px-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-10">
+            <h1 className="text-4xl md:text-5xl font-serif font-medium mb-4">Udemy講座一覧</h1>
+            <p className="text-base md:text-lg text-muted-foreground">AIを活用して、学び・発信・仕事を変える実践講座</p>
           </div>
 
-          {/* Courses Table (aligned columns) */}
-          <div className="overflow-x-auto">
-            <table className="min-w-full border border-border bg-white rounded-lg overflow-hidden">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground w-[160px]">サムネイル</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground">評価</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground">タイトル</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground">おすすめの人</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground">金額</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-foreground">リンク</th>
-                </tr>
-              </thead>
-              <tbody>
-                {courses.map((course) => (
-                  <tr key={course.id} className="border-t border-border">
-                    <td className="px-4 py-3 align-top">
-                      {course.thumbnail && (
-                        <div className="relative w-[140px] h-[80px] bg-gray-100 rounded">
-                          <Image
-                            src={course.thumbnail || "/placeholder.svg"}
-                            alt={course.title}
-                            fill
-                            className="object-cover rounded"
-                            sizes="140px"
-                          />
-                        </div>
-                      )}
-                    </td>
-                    <td className="px-4 py-3 align-top">
-                      <div className="flex items-center gap-2">
-                        <div className="flex items-center">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`w-4 h-4 ${i < Math.floor(course.rating) ? "fill-accent text-accent" : "text-border"}`}
-                            />
-                          ))}
-                        </div>
-                        <span className="text-sm font-medium text-foreground">{course.rating}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 align-top">
-                      <div className="text-sm font-bold text-foreground">{course.title}</div>
-                    </td>
-                    <td className="px-4 py-3 align-top">
-                      <div className="text-sm text-foreground/70">{course.description}</div>
-                    </td>
-                    <td className="px-4 py-3 align-top whitespace-nowrap">
-                      <span className="text-lg font-bold text-foreground">¥{course.price.toLocaleString()}</span>
-                    </td>
-                    <td className="px-4 py-3 align-top">
-                      <a
-                        href={course.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors group"
-                      >
-                        <span>→ Udemyで見る</span>
-                        <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                      </a>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {courses.map((c) => (
+              <CourseCard key={c.id} course={c} />
+            ))}
           </div>
 
-          {/* Bottom Note */}
-          <div className="mt-16 text-center">
-            <p className="text-sm text-foreground/60 font-sans">
-              各講座はUdemyプラットフォームで受講可能です。セール期間中は特別価格で受講できます。
-            </p>
+          <div className="mt-12 text-center text-sm text-muted-foreground">
+            各講座はUdemyで受講できます。価格・割引はUdemy側の表示に準じます。
           </div>
         </div>
       </section>
 
       <Footer />
+    </div>
+  )
+}
+
+function CourseCard({ course }: { course: Course }) {
+  const filledStars = Math.floor(course.rating ?? 0)
+  const points = (course.description || "")
+    .split("／")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(0, 4)
+
+  return (
+    <div className="rounded-2xl overflow-hidden bg-card border border-border shadow-sm hover:shadow-md transition-all">
+      <div className="relative aspect-[16/9] bg-black">
+        {course.badge && (
+          <div className="absolute left-3 top-3 z-10 text-xs font-semibold bg-secondary text-secondary-foreground px-2.5 py-1 rounded-full shadow">
+            {course.badge}
+          </div>
+        )}
+        <Image
+          src={course.thumbnail || "/placeholder.jpg"}
+          alt={course.title}
+          fill
+          sizes="(min-width: 1024px) 384px, (min-width: 768px) 50vw, 100vw"
+          className="object-cover"
+        />
+      </div>
+
+      <div className="p-5 md:p-6">
+        <div
+          className="mb-2 text-lg font-bold"
+          style={{ display: "-webkit-box", WebkitLineClamp: 2 as any, WebkitBoxOrient: "vertical", overflow: "hidden" }}
+        >
+          {course.title}
+        </div>
+
+        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+          <img src="/placeholder-user.jpg" alt="instructor" className="w-6 h-6 rounded-full object-cover" />
+          <span>AI Contents Labo</span>
+        </div>
+
+        <div className="flex items-center gap-2 mb-4">
+          <div className="flex">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star key={i} className={`w-4 h-4 ${i < filledStars ? "text-accent fill-current" : "text-muted-foreground/40"}`} />
+            ))}
+          </div>
+          <span className="text-sm font-semibold">{course.rating.toFixed(1)}</span>
+          {course.ratingCount ? <span className="text-xs text-muted-foreground">({course.ratingCount}件)</span> : null}
+        </div>
+
+        <div className="grid grid-cols-3 gap-3 text-xs text-muted-foreground mb-4">
+          <div>
+            <div className="text-muted-foreground">学習時間</div>
+            <div className="mt-0.5">{course.hours ?? "—"}</div>
+          </div>
+          <div>
+            <div className="text-muted-foreground">レクチャー数</div>
+            <div className="mt-0.5">{course.lectures ?? "—"}</div>
+          </div>
+          <div>
+            <div className="text-muted-foreground">レベル</div>
+            <div className="mt-0.5">{course.level ?? "—"}</div>
+          </div>
+        </div>
+
+        {points.length > 0 && (
+          <ul className="space-y-2 mb-5">
+            {points.map((p, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <Check className="w-4 h-4 text-primary mt-0.5" />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="border-t border-border pt-4">
+          <div className="flex items-end gap-3 mb-4">
+            {course.originalPrice ? (
+              <>
+                <div className="text-sm text-muted-foreground line-through">¥{course.originalPrice.toLocaleString()}</div>
+                <div className="text-2xl font-extrabold">¥{course.price.toLocaleString()}</div>
+              </>
+            ) : (
+              <div className="text-2xl font-extrabold">¥{course.price.toLocaleString()}</div>
+            )}
+          </div>
+          <a
+            href={course.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full text-center bg-primary text-primary-foreground font-bold rounded-lg py-3 hover:bg-primary/90 transition"
+          >
+            セール価格で申し込む
+          </a>
+        </div>
+      </div>
     </div>
   )
 }
